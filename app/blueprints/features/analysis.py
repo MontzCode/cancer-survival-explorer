@@ -1,14 +1,14 @@
 import pandas as pd
-import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 import plotly.io as pio
+from flask import current_app
 
-DATA_PATH = r'C:\Users\CCLeyton\Documents\cancer_survival_app\app\data\BreastCancerMETABRIC.csv'
+def get_data_path():
+    return current_app.config['DATA_PATH']
 
 def load_data():
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_csv(get_data_path())
     df = df.dropna(subset=['Overall Survival Status'])
     df['deceased'] = (df['Overall Survival Status'] == 'Deceased').astype(int)
     return df

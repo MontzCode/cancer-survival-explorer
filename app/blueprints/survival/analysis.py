@@ -2,11 +2,13 @@ import pandas as pd
 from lifelines import KaplanMeierFitter
 import plotly.graph_objects as go
 import plotly.io as pio
+from flask import current_app
 
-DATA_PATH = r'C:\Users\CCLeyton\Documents\cancer_survival_app\app\data\BreastCancerMETABRIC.csv'
+def get_data_path():
+    return current_app.config['DATA_PATH']
 
 def load_data():
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_csv(get_data_path())
     df = df.dropna(subset=['Overall Survival (Months)', 'Overall Survival Status'])
     df['deceased'] = (df['Overall Survival Status'] == 'Deceased').astype(int)
     return df
