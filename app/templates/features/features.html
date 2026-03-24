@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Importance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/survival">Survival Analysis</a>
+        <a href="/features">Feature Importance</a>
+        <a href="/risk">Risk Tool</a>
+    </nav>
+    <main>
+        <h1>Feature Importance</h1>
+        <p>Which clinical variables are most predictive of patient survival, based on a Random Forest model trained on the METABRIC dataset.</p>
+        <div class="chart-container">
+            {{ chart | safe }}
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Survival Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/survival">Survival Analysis</a>
+        <a href="/features">Feature Importance</a>
+        <a href="/risk">Risk Tool</a>
+    </nav>
+    <main>
+        <h1>Cancer Survival Explorer</h1>
+        <p>An interactive tool for exploring breast cancer survival data from the METABRIC dataset, covering 2,509 patients.</p>
+        <div class="card-grid">
+            <a href="/survival" class="card">
+                <h2>Survival Curves</h2>
+                <p>Kaplan-Meier survival analysis by tumour stage, subtype and treatment.</p>
+            </a>
+            <a href="/features" class="card">
+                <h2>Feature Importance</h2>
+                <p>Which clinical variables best predict patient survival outcomes.</p>
+            </a>
+            <a href="/risk" class="card">
+                <h2>Risk Tool</h2>
+                <p>Enter patient characteristics and get a survival probability estimate.</p>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
