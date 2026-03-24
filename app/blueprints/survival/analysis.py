@@ -45,3 +45,36 @@ def survival_by_stage():
     )
 
     return pio.to_html(fig, full_html=False)
+
+def survival_by_subtype():
+    df = load_data()
+    df = df.dropna(subset=['Pam50 + Claudin-low subtype'])
+
+    kmf = KaplanMeierFitter()
+    fig = go.Figure()
+
+    for subtype in sorted(df['Pam50 + Claudin-low subtype'].unique()):
+        mask = df['Pam50 + Claudin-low subtype'] == subtype
+        kmf.fit(
+            durations=df.loc[mask, 'Overall Survival (Months)'],
+            event_observed=df.loc[mask, 'deceased'],
+            label=subtype
+        )
+        sf = kmf.survival_function_
+        fig.add_trace(go.Scatter(
+            x=sf.index,
+            y=sf.iloc[:, 0],
+            mode='lines',
+            name=subtype
+        ))
+
+    fig.update_layout(
+        title='Overall Survival by Molecular Subtype (Pam50)',
+        xaxis_title='Time (Months)',
+        yaxis_title='Survival Probability',
+        hovermode='x unified',
+        plot_bgcolor='white',
+        paper_bgcolor='white'
+    )
+
+    return pio.to_html(fig, full_html=False)

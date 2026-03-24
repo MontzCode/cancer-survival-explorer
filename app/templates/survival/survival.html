@@ -15,10 +15,13 @@
     </nav>
     <main>
         <h1>Survival Analysis</h1>
+        <p>Kaplan-Meier survival curves from the METABRIC dataset, stratified by tumour stage and molecular subtype.</p>
         <div class="chart-container">
-            {{ chart | safe }}
+            {{ stage_chart | safe }}
+        </div>
+        <div class="chart-container" style="margin-top: 2rem;">
+            {{ subtype_chart | safe }}
         </div>
     </main>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
