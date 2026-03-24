@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from config import Config
 
 def create_app():
@@ -14,5 +14,9 @@ def create_app():
     app.register_blueprint(survival_bp)
     app.register_blueprint(features_bp)
     app.register_blueprint(risk_tool_bp)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
 
     return app

@@ -12,10 +12,17 @@ FEATURES = [
     'Mutation Count'
 ]
 
+_model_cache = None
+
 def get_data_path():
     return current_app.config['DATA_PATH']
 
 def train_model():
+    global _model_cache
+
+    if _model_cache is not None:
+        return _model_cache
+
     df = pd.read_csv(get_data_path())
     df = df.dropna(subset=['Overall Survival Status'])
     df['deceased'] = (df['Overall Survival Status'] == 'Deceased').astype(int)
@@ -27,7 +34,8 @@ def train_model():
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X, y)
 
-    return model
+    _model_cache = model
+    return _model_cache
 
 def predict_survival(age, tumor_size, tumor_stage, grade, npi, lymph_nodes, mutation_count):
     model = train_model()
